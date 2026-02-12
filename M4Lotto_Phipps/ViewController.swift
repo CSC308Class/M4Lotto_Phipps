@@ -173,7 +173,7 @@ class ViewController: UIViewController {
             numLabel6.backgroundColor = .red
             numLabel6.textColor = .white
         case 11...20:
-            numLabel1.backgroundColor = .green
+            numLabel6.backgroundColor = .green
             numLabel6.textColor = .black
         case 21...30:
             numLabel6.backgroundColor = .blue
@@ -198,33 +198,54 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        numLabel1.layer.cornerRadius = numLabel1.bounds.width / 2
+        super.viewWillAppear(animated)
         
-        numLabel1.clipsToBounds = true
+        let labels = [numLabel1!, numLabel2!, numLabel3!, numLabel4!, numLabel5!, numLabel6!, numLabel7!]
         
-        numLabel2.layer.cornerRadius = numLabel1.bounds.width / 2 // Shift + Control + Click
+        var nums = [Int]()
+        while nums.count < labels.count {
+            let rndNum = Int.random(in: 1...45)
+            if !nums.contains(rndNum) {
+                nums.append(rndNum)
+            }
+        }
         
-        numLabel2.clipsToBounds = true
-    
-        numLabel3.layer.cornerRadius = numLabel1.bounds.width / 2
+        let sortedNums = nums.sorted()
         
-        numLabel3.clipsToBounds = true
+        //nums.sorted(by: >) // decending order
+        for (index, label) in labels.enumerated(){
+            label.layer.cornerRadius = label.bounds.width / 2
+            
+            label.clipsToBounds = true
+            
+            label.text = "\(sortedNums[index])" //String interpolation
+            
+            switch sortedNums[index] {
+            case 1...10:
+                label.backgroundColor = .red
+                label.textColor = .white
+            case 11...20:
+                label.backgroundColor = .green
+                label.textColor = .black
+            case 21...30:
+                label.backgroundColor = .blue
+                label.textColor = .white
+            case 31...40:
+                label.backgroundColor = .yellow
+                label.textColor = .black
+            case 41...45:
+                label.backgroundColor = .purple
+                label.textColor = .black
+            default:
+                break
+            }
+            numLabel7.backgroundColor = .orange
+            numLabel7.textColor = .white
+            
+        }
         
-        numLabel4.layer.cornerRadius = numLabel1.bounds.width / 2
         
-        numLabel4.clipsToBounds = true
-        
-        numLabel5.layer.cornerRadius = numLabel1.bounds.width / 2
-        
-        numLabel5.clipsToBounds = true
-        
-        numLabel6.layer.cornerRadius = numLabel1.bounds.width / 2
-        
-        numLabel6.clipsToBounds = true
-        
-        numLabel7.layer.cornerRadius = numLabel1.bounds.width / 2
-        
-        numLabel7.clipsToBounds = true
+       
     }
 
 
